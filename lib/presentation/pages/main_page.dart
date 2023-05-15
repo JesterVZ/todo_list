@@ -14,18 +14,34 @@ class MainPage extends AppPageView {
 }
 
 class _MainPageState extends State<MainPage> {
+  Future refreshData() async {}
   @override
   Widget build(BuildContext context) => AppScaffold(
-        appBar: AppUI.appBar(
-            context: context,
-            title: const Text('data'),
-            actions: [_buildSettingsButton()]),
+        appBar: AppUI.appBar(context: context, leading: _buildSettingsButton()),
         body: _buildBody(),
       );
   _buildSettingsButton() =>
       IconButton(onPressed: () {}, icon: const Icon(Icons.settings));
 
-  _buildBody() => const Center(
-        child: Text('test'),
+  _buildBody() => RefreshIndicator(
+      onRefresh: refreshData,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(children: [_buildHeader()]),
+      ));
+  _buildHeader() => Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Привет',
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleSmall!
+                      .copyWith(fontWeight: FontWeight.w300)),
+              Text('Test', style: Theme.of(context).textTheme.titleLarge)
+            ],
+          )
+        ],
       );
 }
