@@ -13,10 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Todo list',
         theme: ThemeData(
           fontFamily: 'Inter',
-          primarySwatch: Colors.blue,
+          primarySwatch: AppColors.appcolor,
           appBarTheme: Theme.of(context).appBarTheme.copyWith(
                 backgroundColor: AppColors.backgroundColor,
                 shadowColor: Colors.transparent,
@@ -27,6 +27,19 @@ class MyApp extends StatelessWidget {
                   statusBarIconBrightness: Brightness.dark,
                 ),
               ),
+          inputDecorationTheme: InputDecorationTheme(
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  width: 2,
+                  color: AppColors.gray1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide:
+                    const BorderSide(width: 2, color: AppColors.appcolor),
+              )),
           textTheme: Theme.of(context).textTheme.copyWith(
               titleLarge: Theme.of(context)
                   .textTheme

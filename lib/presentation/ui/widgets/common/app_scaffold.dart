@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/presentation/ui/app_colors.dart';
 
+// ignore: must_be_immutable
 class AppScaffold extends StatelessWidget {
   final AppBar appBar;
   final Widget? floatingActionButton;
