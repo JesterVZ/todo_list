@@ -14,15 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-TaskEntity _$TaskEntityFromJson(Map<String, dynamic> json) {
-  return _TaskEntity.fromJson(json);
-}
-
 /// @nodoc
 mixin _$TaskEntity {
-  String get name => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get description => throw _privateConstructorUsedError;
+  int get categoryId => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TaskEntityCopyWith<TaskEntity> get copyWith =>
       throw _privateConstructorUsedError;
@@ -34,7 +32,7 @@ abstract class $TaskEntityCopyWith<$Res> {
           TaskEntity value, $Res Function(TaskEntity) then) =
       _$TaskEntityCopyWithImpl<$Res, TaskEntity>;
   @useResult
-  $Res call({String name});
+  $Res call({int id, String title, String description, int categoryId});
 }
 
 /// @nodoc
@@ -50,13 +48,28 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? id = null,
+    Object? title = null,
+    Object? description = null,
+    Object? categoryId = null,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -69,7 +82,7 @@ abstract class _$$_TaskEntityCopyWith<$Res>
       __$$_TaskEntityCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name});
+  $Res call({int id, String title, String description, int categoryId});
 }
 
 /// @nodoc
@@ -83,31 +96,53 @@ class __$$_TaskEntityCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? id = null,
+    Object? title = null,
+    Object? description = null,
+    Object? categoryId = null,
   }) {
     return _then(_$_TaskEntity(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
               as String,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      categoryId: null == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_TaskEntity implements _TaskEntity {
-  const _$_TaskEntity({required this.name});
 
-  factory _$_TaskEntity.fromJson(Map<String, dynamic> json) =>
-      _$$_TaskEntityFromJson(json);
+class _$_TaskEntity implements _TaskEntity {
+  const _$_TaskEntity(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.categoryId});
 
   @override
-  final String name;
+  final int id;
+  @override
+  final String title;
+  @override
+  final String description;
+  @override
+  final int categoryId;
 
   @override
   String toString() {
-    return 'TaskEntity(name: $name)';
+    return 'TaskEntity(id: $id, title: $title, description: $description, categoryId: $categoryId)';
   }
 
   @override
@@ -115,35 +150,40 @@ class _$_TaskEntity implements _TaskEntity {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TaskEntity &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.categoryId, categoryId) ||
+                other.categoryId == categoryId));
   }
 
-  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name);
+  int get hashCode =>
+      Object.hash(runtimeType, id, title, description, categoryId);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_TaskEntityCopyWith<_$_TaskEntity> get copyWith =>
       __$$_TaskEntityCopyWithImpl<_$_TaskEntity>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_TaskEntityToJson(
-      this,
-    );
-  }
 }
 
 abstract class _TaskEntity implements TaskEntity {
-  const factory _TaskEntity({required final String name}) = _$_TaskEntity;
-
-  factory _TaskEntity.fromJson(Map<String, dynamic> json) =
-      _$_TaskEntity.fromJson;
+  const factory _TaskEntity(
+      {required final int id,
+      required final String title,
+      required final String description,
+      required final int categoryId}) = _$_TaskEntity;
 
   @override
-  String get name;
+  int get id;
+  @override
+  String get title;
+  @override
+  String get description;
+  @override
+  int get categoryId;
   @override
   @JsonKey(ignore: true)
   _$$_TaskEntityCopyWith<_$_TaskEntity> get copyWith =>

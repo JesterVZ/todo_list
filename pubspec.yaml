@@ -16,6 +16,9 @@ dependencies:
   json_serializable: ^6.1.3
   get_it: ^7.2.0
   dartz: ^0.10.1
+  flutter_riverpod: ^2.3.6
+  flutter_svg: ^2.0.6
+  sqflite: ^2.2.8+4
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +26,9 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/add_task_button.svg
 
   fonts:
     - family: Inter
@@ -36,3 +42,4 @@ flutter:
         - asset: fonts/Inter-Regular.ttf
         - asset: fonts/Inter-SemiBold.ttf
         - asset: fonts/Inter-Thin.ttf
+  
