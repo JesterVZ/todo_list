@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CategoryEntity {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CategoryEntityCopyWith<CategoryEntity> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $CategoryEntityCopyWith<$Res> {
           CategoryEntity value, $Res Function(CategoryEntity) then) =
       _$CategoryEntityCopyWithImpl<$Res, CategoryEntity>;
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, int count});
 }
 
 /// @nodoc
@@ -48,6 +49,7 @@ class _$CategoryEntityCopyWithImpl<$Res, $Val extends CategoryEntity>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? count = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -58,6 +60,10 @@ class _$CategoryEntityCopyWithImpl<$Res, $Val extends CategoryEntity>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -70,7 +76,7 @@ abstract class _$$_CategoryEntityCopyWith<$Res>
       __$$_CategoryEntityCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name});
+  $Res call({int id, String name, int count});
 }
 
 /// @nodoc
@@ -86,6 +92,7 @@ class __$$_CategoryEntityCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? count = null,
   }) {
     return _then(_$_CategoryEntity(
       id: null == id
@@ -96,23 +103,31 @@ class __$$_CategoryEntityCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_CategoryEntity implements _CategoryEntity {
-  const _$_CategoryEntity({required this.id, required this.name});
+class _$_CategoryEntity extends _CategoryEntity {
+  const _$_CategoryEntity(
+      {required this.id, required this.name, required this.count})
+      : super._();
 
   @override
   final int id;
   @override
   final String name;
+  @override
+  final int count;
 
   @override
   String toString() {
-    return 'CategoryEntity(id: $id, name: $name)';
+    return 'CategoryEntity(id: $id, name: $name, count: $count)';
   }
 
   @override
@@ -121,11 +136,12 @@ class _$_CategoryEntity implements _CategoryEntity {
         (other.runtimeType == runtimeType &&
             other is _$_CategoryEntity &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.count, count) || other.count == count));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, count);
 
   @JsonKey(ignore: true)
   @override
@@ -134,14 +150,19 @@ class _$_CategoryEntity implements _CategoryEntity {
       __$$_CategoryEntityCopyWithImpl<_$_CategoryEntity>(this, _$identity);
 }
 
-abstract class _CategoryEntity implements CategoryEntity {
+abstract class _CategoryEntity extends CategoryEntity {
   const factory _CategoryEntity(
-      {required final int id, required final String name}) = _$_CategoryEntity;
+      {required final int id,
+      required final String name,
+      required final int count}) = _$_CategoryEntity;
+  const _CategoryEntity._() : super._();
 
   @override
   int get id;
   @override
   String get name;
+  @override
+  int get count;
   @override
   @JsonKey(ignore: true)
   _$$_CategoryEntityCopyWith<_$_CategoryEntity> get copyWith =>

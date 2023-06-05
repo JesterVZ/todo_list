@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/base/widgets/app_page_view.dart';
-import 'package:todo_list/domain/model/category_model.dart';
 import 'package:todo_list/presentation/ui/app_colors.dart';
 import 'package:todo_list/presentation/ui/app_ui.dart';
+import 'package:todo_list/presentation/ui/widgets/common/add_category_card.dart';
 import 'package:todo_list/presentation/ui/widgets/common/app_scaffold.dart';
 import 'package:todo_list/presentation/ui/widgets/common/category_card.dart';
+import 'package:todo_list/presentation/viewmodel/main_page_viewmodel.dart';
 
 class MainPage extends AppPageView {
   const MainPage({super.key});
@@ -18,10 +20,8 @@ class MainPage extends AppPageView {
 
 class _MainPageState extends State<MainPage> {
   final searchController = TextEditingController();
-
-  final catrgoryTest = [
-    CategoryModel(id: 0, name: 'Учеба', color: Colors.green, count: 5)
-  ];
+  final _mainPageViewModeltateNotifierProvider =
+      mainPageViewModeltateNotifierProvider;
 
   Future refreshData() async {}
 
@@ -100,15 +100,30 @@ class _MainPageState extends State<MainPage> {
   _buildCategoryList() => SizedBox(
         width: MediaQuery.of(context).size.width,
         height: 130,
-        child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (BuildContext context, int i) => CategoryCard(
-                color: catrgoryTest[i].color,
-                name: catrgoryTest[i].name,
-                count: catrgoryTest[i].count),
-            separatorBuilder: (BuildContext context, int i) => Container(
-                  width: 33,
-                ),
-            itemCount: catrgoryTest.length),
+        child: Consumer(
+          builder: (context, ref, _) => ref
+              .watch(_mainPageViewModeltateNotifierProvider)
+              .maybeWhen(success: (content) {
+            dynamic list = content;
+            return ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int i) {
+                  if (i == list.length - 1) {
+                    return const AddCategoryCard();
+                  } else {
+                    return CategoryCard(
+                        color: list[i].color!,
+                        name: list[i].name,
+                        count: list[i].count);
+                  }
+                },
+                separatorBuilder: (BuildContext context, int i) => Container(
+                      width: 33,
+                    ),
+                itemCount: list.length);
+          }, orElse: () {
+            return Container();
+          }),
+        ),
       );
 }

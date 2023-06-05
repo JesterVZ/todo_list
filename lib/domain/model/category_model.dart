@@ -4,10 +4,7 @@ class CategoryModel {
   int id;
   String name;
   int count;
-  Color color;
+  Color? color;
   CategoryModel(
-      {required this.id,
-      required this.name,
-      required this.color,
-      required this.count});
+      {required this.id, required this.name, this.color, required this.count});
 }
