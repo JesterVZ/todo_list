@@ -29,17 +29,28 @@ class MyApp extends StatelessWidget {
                 ),
               ),
           inputDecorationTheme: InputDecorationTheme(
+              hintStyle: Theme.of(context)
+                  .textTheme
+                  .titleSmall!
+                  .copyWith(color: AppColors.gray1),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: const BorderSide(
-                  width: 2,
+                  width: 1,
                   color: AppColors.gray1,
                 ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide:
-                    const BorderSide(width: 2, color: AppColors.appcolor),
+                    const BorderSide(width: 1, color: AppColors.appcolor),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  width: 1,
+                  color: AppColors.gray1,
+                ),
               )),
           textTheme: Theme.of(context).textTheme.copyWith(
               titleLarge: Theme.of(context)

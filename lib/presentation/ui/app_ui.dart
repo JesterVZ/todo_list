@@ -4,15 +4,19 @@ class AppUI {
   static appBar(
           {required BuildContext context,
           Widget? title,
+          bool? centerTitle,
           List<Widget>? actions,
           Widget? leading}) =>
       AppBar(
+        centerTitle: centerTitle,
         title: title,
         actions: actions,
         leading: leading,
       );
   static const contentPading = EdgeInsets.symmetric(horizontal: 44);
   static const categoryPadding = EdgeInsets.all(18);
+  static const addCategoryPadding =
+      EdgeInsets.only(top: 22, right: 10, bottom: 15, left: 10);
 
   static const contentVerticalSpacingExtraSmall = SizedBox(height: 8);
 

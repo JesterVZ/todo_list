@@ -19,6 +19,8 @@ dependencies:
   flutter_riverpod: ^2.3.6
   flutter_svg: ^2.0.6
   sqflite: ^2.2.8+4
+  sliding_up_panel: ^2.0.0+1
+  flutter_colorpicker: ^1.0.3
 
 dev_dependencies:
   flutter_test:
