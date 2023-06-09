@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/presentation/ui/app_colors.dart';
 import 'package:todo_list/presentation/ui/app_ui.dart';
+import 'package:todo_list/presentation/ui/widgets/common/add_color_button.dart';
 import 'package:todo_list/presentation/ui/widgets/common/app_scaffold.dart';
+import 'package:todo_list/presentation/ui/widgets/common/color_indicator.dart';
 
 class AddCategoryPage extends StatefulWidget {
   const AddCategoryPage({super.key});
@@ -10,6 +13,12 @@ class AddCategoryPage extends StatefulWidget {
 }
 
 class AddCategoryPageState extends State<AddCategoryPage> {
+  var colorList = <Color>[
+    AppColors.redColor,
+    AppColors.greenColor,
+    AppColors.blueColor
+  ];
+
   @override
   Widget build(BuildContext context) => GestureDetector(
       onTap: () {
@@ -43,7 +52,9 @@ class AddCategoryPageState extends State<AddCategoryPage> {
                     AppUI.contentVerticalSpacingMedium,
                     _buildTitle(),
                     AppUI.contentVerticalSpacingMedium,
-                    _buildNameTextField()
+                    _buildNameTextField(),
+                    AppUI.contentVerticalSpacingMedium,
+                    _buildColorPicker()
                   ]),
             )),
           ))
@@ -61,13 +72,42 @@ class AddCategoryPageState extends State<AddCategoryPage> {
           hintText: 'Название',
         ),
       );
+
+  _buildColorPicker() => Scrollbar(
+        child: SingleChildScrollView(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: 30,
+            child: Row(
+              children: [
+                Expanded(
+                    child: ListView.separated(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: colorList.length,
+                  separatorBuilder: (context, i) => AppUI.colorIndicatorSpacing,
+                  itemBuilder: (context, i) {
+                    if (i < colorList.length - 1) {
+                      return ColorIndicator(color: colorList[i]);
+                    } else {
+                      return AddColorButton(onClick: () {});
+                    }
+                  },
+                ))
+              ],
+            ),
+          ),
+        ),
+      );
+
   _buildActionButton() => Padding(
         padding: AppUI.contentPading,
         child: Row(
           children: [
             Expanded(
                 child: ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.greenColor),
               onPressed: () {},
               child: const Text("Добавить задачу"),
             ))

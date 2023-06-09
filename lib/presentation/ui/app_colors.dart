@@ -30,4 +30,10 @@ class AppColors {
     700: Color(0xFFA966FF),
   });
   static const int _appcolorAccentValue = 0xFFD4B3FF;
+
+  static const redColor = Color(0xFFFF0000);
+
+  static const greenColor = Color(0xFF00FF38);
+
+  static const blueColor = Color(0xFF0085FF);
 }

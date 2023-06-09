@@ -26,6 +26,8 @@ class AppUI {
 
   static const contentVerticalSpacingLarge = SizedBox(height: 43);
 
+  static const colorIndicatorSpacing = SizedBox(width: 12);
+
   static categoryCardBoxDecoration(Color color) => BoxDecoration(
       borderRadius: const BorderRadius.all(Radius.circular(25)), color: color);
 }

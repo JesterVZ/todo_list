@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:todo_list/domain/callback.dart';
 import 'package:todo_list/presentation/ui/app_colors.dart';
 import 'package:todo_list/presentation/ui/app_ui.dart';
 
-typedef AddCategoryCallBack = Function();
-
 // ignore: must_be_immutable
 class AddCategoryCard extends StatelessWidget {
-  AddCategoryCallBack callBack;
+  ClickCallBack callBack;
   AddCategoryCard({super.key, required this.callBack});
 
   @override
