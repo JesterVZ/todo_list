@@ -13,12 +13,6 @@ class AddCategoryPage extends StatefulWidget {
 }
 
 class AddCategoryPageState extends State<AddCategoryPage> {
-  var colorList = <Color>[
-    AppColors.redColor,
-    AppColors.greenColor,
-    AppColors.blueColor
-  ];
-
   @override
   Widget build(BuildContext context) => GestureDetector(
       onTap: () {
