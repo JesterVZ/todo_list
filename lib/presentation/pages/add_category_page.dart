@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/presentation/ui/app_colors.dart';
 import 'package:todo_list/presentation/ui/app_ui.dart';
 import 'package:todo_list/presentation/ui/widgets/common/add_color_button.dart';
 import 'package:todo_list/presentation/ui/widgets/common/app_scaffold.dart';
 import 'package:todo_list/presentation/ui/widgets/common/color_indicator.dart';
+import 'package:todo_list/presentation/viewmodel/add_category_page/color_picker_viewmodel.dart';
 
 class AddCategoryPage extends StatefulWidget {
   const AddCategoryPage({super.key});
@@ -13,6 +15,8 @@ class AddCategoryPage extends StatefulWidget {
 }
 
 class AddCategoryPageState extends State<AddCategoryPage> {
+  final _colorPickerViewModelStateNotifierProvider =
+      colorPickerViewModelStateNotifierProvider;
   @override
   Widget build(BuildContext context) => GestureDetector(
       onTap: () {
@@ -75,19 +79,37 @@ class AddCategoryPageState extends State<AddCategoryPage> {
             child: Row(
               children: [
                 Expanded(
-                    child: ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: colorList.length,
-                  separatorBuilder: (context, i) => AppUI.colorIndicatorSpacing,
-                  itemBuilder: (context, i) {
-                    if (i < colorList.length - 1) {
-                      return ColorIndicator(color: colorList[i]);
-                    } else {
-                      return AddColorButton(onClick: () {});
-                    }
-                  },
-                ))
+                    child: Consumer(
+                        builder: (context, ref, child) => ref
+                                .watch(
+                                    _colorPickerViewModelStateNotifierProvider)
+                                .maybeWhen(success: (content) {
+                              if (content is List<Color>) {
+                                return ListView.separated(
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (context, i) {
+                                      if (i <= content.length - 1) {
+                                        return ColorIndicator(
+                                            color: content[i]);
+                                      } else {
+                                        return AddColorButton(onClick: () {
+                                          ref
+                                              .watch(
+                                                  _colorPickerViewModelStateNotifierProvider
+                                                      .notifier)
+                                              .pickColor();
+                                        });
+                                      }
+                                    },
+                                    separatorBuilder: (context, i) =>
+                                        AppUI.colorIndicatorSpacing,
+                                    itemCount: content.length + 1);
+                              } else {
+                                return const SizedBox();
+                              }
+                            }, orElse: () {
+                              return Container();
+                            })))
               ],
             ),
           ),

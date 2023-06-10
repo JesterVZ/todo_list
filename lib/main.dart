@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_list/domain/domain_module.dart';
 import 'package:todo_list/presentation/pages/main_page.dart';
 import 'package:todo_list/presentation/ui/app_colors.dart';
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Todo list',
+        navigatorKey: navigatorKey,
         theme: ThemeData(
           fontFamily: 'Inter',
           primarySwatch: AppColors.appcolor,
@@ -53,18 +55,31 @@ class MyApp extends StatelessWidget {
                 ),
               )),
           textTheme: Theme.of(context).textTheme.copyWith(
-              titleLarge: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontSize: 30, color: AppColors.whiteColor),
-              titleMedium: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontSize: 20, color: AppColors.whiteColor),
-              titleSmall: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontSize: 15, color: AppColors.whiteColor)),
+                titleLarge: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontSize: 30, color: AppColors.whiteColor),
+                titleMedium: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontSize: 20, color: AppColors.whiteColor),
+                titleSmall: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontSize: 15, color: AppColors.whiteColor),
+                bodyLarge: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontSize: 20, fontWeight: FontWeight.w400),
+                bodyMedium: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontSize: 15, fontWeight: FontWeight.w400),
+                bodySmall: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(fontSize: 12, fontWeight: FontWeight.w400),
+              ),
         ),
         home: const MainPage());
   }
