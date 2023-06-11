@@ -5,6 +5,7 @@ import 'package:todo_list/core/error/failure.dart';
 import 'package:todo_list/data/datasource/database/category_database.dart';
 import 'package:todo_list/data/datasource/database/color_database.dart';
 import 'package:todo_list/data/entities/category_list.dart';
+import 'package:todo_list/data/entities/color_entity.dart';
 import 'package:todo_list/data/mapper/categories_mapper.dart';
 import 'package:todo_list/data/mapper/color_mapper.dart';
 import 'package:todo_list/domain/model/category_model.dart';
@@ -30,14 +31,14 @@ class CategoriesRepositoryImpl implements CategoriesRepository {
   }
 
   @override
-  Future getAllColors() async {
+  Future<Either<Failure, List<ColorEntity>>> getAllColors() async {
     final colorList = await _colorDataBase.getAllColors();
-    return Right(colorList);
+    return Right(_colorMapper.transformToModel(colorList));
   }
 
   @override
-  Future insertColor(Color color) {
-    // TODO: implement insertColor
-    throw UnimplementedError();
+  Future insertColor(Color color) async {
+    await _colorDataBase
+        .insertColor(_colorMapper.transformToNewEntityMap(color));
   }
 }

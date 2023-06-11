@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:todo_list/const/App.dart';
 import 'package:todo_list/data/datasource/database/db_const.dart';
 
 abstract interface class ColorDataBase {
@@ -28,9 +26,8 @@ class ColorDataBaseImpl with DbProvider implements ColorDataBase {
     await db.transaction((txn) async {
       final id = await txn.insert(DbProvider.colorsTableName, color,
           conflictAlgorithm: ConflictAlgorithm.replace);
-      final results = await txn
+      await txn
           .query(DbProvider.colorsTableName, where: 'id = ?', whereArgs: [id]);
-      var entity = results.first;
     });
   }
 }

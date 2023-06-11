@@ -15,21 +15,28 @@ mixin DbProvider {
   }
 
   Future<Database> _initDatabase() async {
-    return openDatabase(
-      join(await getDatabasesPath(), databaseName),
-      onCreate: (db, _) async {
-        await db.execute('''
-          CREATE TABLE $categoriesTableName(
+    try {
+      return openDatabase(
+        join(await getDatabasesPath(), databaseName),
+        onCreate: (db, _) async {
+          await db.execute('''
+          CREATE TABLE IF NOT EXISTS $categoriesTableName(
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             name TEXT NOT NULL
-          );
-          CREATE TABLE $colorsTableName(
+          )
+          
+        ''');
+          await db.execute(''' 
+        CREATE TABLE IF NOT EXISTS $colorsTableName(
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             value TEXT NOT NULL
-          );
+          )
         ''');
-      },
-      version: databaseVersion,
-    );
+        },
+        version: databaseVersion,
+      );
+    } catch (e) {
+      rethrow;
+    }
   }
 }
