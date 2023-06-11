@@ -1,7 +1,7 @@
 import 'package:todo_list/data/entities/category_entity.dart';
 import 'package:todo_list/data/entities/category_list.dart';
 
-abstract class CategotyListMapper {
+abstract interface class CategotyListMapper {
   CategoryList transformToModel(final List<Map<String, dynamic>> categories);
 }
 

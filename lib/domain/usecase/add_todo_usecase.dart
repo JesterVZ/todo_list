@@ -1,6 +1,6 @@
 import 'package:todo_list/domain/model/task_model.dart';
 
-abstract class AddTaskUseCase {
+abstract interface class AddTaskUseCase {
   Future call(TaskModel model);
 }
 
