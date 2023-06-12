@@ -90,7 +90,9 @@ class AddCategoryPageState extends State<AddCategoryPage> {
                                     itemBuilder: (context, i) {
                                       if (i <= content.length - 1) {
                                         return ColorIndicator(
-                                            color: content[i]);
+                                          color: content[i],
+                                          onSelect: (Color color) {},
+                                        );
                                       } else {
                                         return AddColorButton(onClick: () {
                                           ref

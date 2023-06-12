@@ -21,6 +21,7 @@ dependencies:
   sqflite: ^2.2.8+4
   sliding_up_panel: ^2.0.0+1
   flutter_colorpicker: ^1.0.3
+  flutter_animate: ^4.1.1+1
 
 dev_dependencies:
   flutter_test:
