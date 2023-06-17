@@ -7,6 +7,7 @@ import 'package:todo_list/presentation/ui/widgets/common/app_scaffold.dart';
 import 'package:todo_list/presentation/ui/widgets/common/color_indicator.dart';
 import 'package:todo_list/presentation/viewmodel/add_category_page/color_picker_viewmodel.dart';
 
+// ignore: must_be_immutable
 class AddCategoryPage extends StatefulWidget {
   const AddCategoryPage({super.key});
 
@@ -17,6 +18,7 @@ class AddCategoryPage extends StatefulWidget {
 class AddCategoryPageState extends State<AddCategoryPage> {
   final _colorPickerViewModelStateNotifierProvider =
       colorPickerViewModelStateNotifierProvider;
+
   @override
   Widget build(BuildContext context) => GestureDetector(
       onTap: () {
@@ -90,8 +92,11 @@ class AddCategoryPageState extends State<AddCategoryPage> {
                                     itemBuilder: (context, i) {
                                       if (i <= content.length - 1) {
                                         return ColorIndicator(
+                                          globalIndex: index,
+                                          index: i,
                                           color: content[i],
                                           onSelect: (Color color) {},
+                                          changeIndexCallBack: _setIndex,
                                         );
                                       } else {
                                         return AddColorButton(onClick: () {
