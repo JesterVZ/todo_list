@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/presentation/ui/app_colors.dart';
 import 'package:todo_list/presentation/ui/app_ui.dart';
 import 'package:todo_list/presentation/ui/widgets/common/app_scaffold.dart';
 import 'package:todo_list/presentation/ui/widgets/common/color_palette.dart';
-import 'package:todo_list/presentation/viewmodel/add_category_page/color_picker_viewmodel.dart';
 
 // ignore: must_be_immutable
 class AddCategoryPage extends StatefulWidget {
@@ -15,9 +13,6 @@ class AddCategoryPage extends StatefulWidget {
 }
 
 class AddCategoryPageState extends State<AddCategoryPage> {
-  final _colorPickerViewModelStateNotifierProvider =
-      colorPickerViewModelStateNotifierProvider;
-
   @override
   Widget build(BuildContext context) => GestureDetector(
       onTap: () {
@@ -77,23 +72,8 @@ class AddCategoryPageState extends State<AddCategoryPage> {
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: 30,
-            child: Row(
-              children: [
-                Expanded(
-                    child: Consumer(
-                        builder: (context, ref, child) => ref
-                                .watch(
-                                    _colorPickerViewModelStateNotifierProvider)
-                                .maybeWhen(success: (content) {
-                              if (content is List<Color>) {
-                                return ColorPalette(colors: content);
-                              } else {
-                                return const SizedBox();
-                              }
-                            }, orElse: () {
-                              return Container();
-                            })))
-              ],
+            child: const Row(
+              children: [ColorPalette()],
             ),
           ),
         ),

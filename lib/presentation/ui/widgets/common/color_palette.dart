@@ -6,19 +6,18 @@ import 'package:todo_list/presentation/ui/widgets/common/color_indicator.dart';
 import 'package:todo_list/presentation/viewmodel/add_category_page/color_picker_viewmodel.dart';
 
 class ColorPalette extends ConsumerStatefulWidget {
-  final List<Color> colors;
-  const ColorPalette({super.key, required this.colors});
+  const ColorPalette({super.key});
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ColorPaletteState();
 }
 
 class _ColorPaletteState extends ConsumerState<ColorPalette> {
-  late final List<GlobalKey<ColorIndicatorState>> keys;
+  List<GlobalKey<ColorIndicatorState>> keys = [];
+  final _colorPickerViewModelStateNotifierProvider =
+      colorPickerViewModelStateNotifierProvider;
   @override
   void initState() {
     super.initState();
-    keys = List<GlobalKey<ColorIndicatorState>>.generate(
-        widget.colors.length, (_) => GlobalKey<ColorIndicatorState>());
   }
 
   _onColorClick(int index) {
@@ -31,25 +30,40 @@ class _ColorPaletteState extends ConsumerState<ColorPalette> {
   }
 
   @override
-  Widget build(BuildContext context) => ListView.separated(
-      scrollDirection: Axis.horizontal,
-      itemBuilder: (context, i) {
-        if (i <= widget.colors.length - 1) {
-          return ColorIndicator(
-            key: keys[i],
-            index: i,
-            color: widget.colors[i],
-            onSelect: (Color color) {},
-            changeIndexCallBack: _onColorClick,
-          );
-        } else {
-          return AddColorButton(onClick: () {
-            ref
-                .watch(colorPickerViewModelStateNotifierProvider.notifier)
-                .pickColor();
-          });
-        }
-      },
-      separatorBuilder: (context, i) => AppUI.colorIndicatorSpacing,
-      itemCount: widget.colors.length + 1);
+  Widget build(BuildContext context) {
+    return Expanded(
+        child: ref.watch(_colorPickerViewModelStateNotifierProvider).maybeWhen(
+            success: (content) {
+      if (content is List<Color>) {
+        keys = List<GlobalKey<ColorIndicatorState>>.generate(
+            content.length, (_) => GlobalKey<ColorIndicatorState>());
+        return ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, i) {
+              if (i <= content.length - 1) {
+                return ColorIndicator(
+                  key: keys[i],
+                  index: i,
+                  color: content[i],
+                  onSelect: (Color color) {},
+                  changeIndexCallBack: _onColorClick,
+                );
+              } else {
+                return AddColorButton(onClick: () {
+                  ref
+                      .watch(
+                          _colorPickerViewModelStateNotifierProvider.notifier)
+                      .pickColor();
+                });
+              }
+            },
+            separatorBuilder: (context, i) => AppUI.colorIndicatorSpacing,
+            itemCount: content.length + 1);
+      } else {
+        return const SizedBox();
+      }
+    }, orElse: () {
+      return Container();
+    }));
+  }
 }

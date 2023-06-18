@@ -10,7 +10,7 @@ abstract class AppDialog {
 class ColorPickerDialog extends StatefulWidget implements AppDialog {
   Color pickColor;
 
-  ColorPickerDialog({required this.pickColor});
+  ColorPickerDialog({super.key, required this.pickColor});
   @override
   get getDialog => ColorPickerDialog(pickColor: pickColor);
 
@@ -32,7 +32,7 @@ class _ColorDialogState extends State<ColorPickerDialog> {
           return SingleChildScrollView(
               child: ColorPicker(
             hexInputBar: false,
-            labelTypes: [],
+            labelTypes: const [],
             labelTextStyle: Theme.of(context)
                 .textTheme
                 .titleMedium!
