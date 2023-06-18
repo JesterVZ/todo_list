@@ -2,26 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:todo_list/domain/callback.dart';
 
-// ignore: must_be_immutable
 class ColorIndicator extends StatefulWidget {
   final Color color;
   final int index;
-  int globalIndex;
   final SelectColorCallBack onSelect;
   final ChangeIndexCallBack changeIndexCallBack;
-  ColorIndicator(
+  const ColorIndicator(
       {super.key,
       required this.color,
       required this.index,
-      required this.globalIndex,
       required this.changeIndexCallBack,
       required this.onSelect});
 
   @override
-  State<ColorIndicator> createState() => _ColorIndicatorState();
+  State<ColorIndicator> createState() => ColorIndicatorState();
 }
 
-class _ColorIndicatorState extends State<ColorIndicator>
+class ColorIndicatorState extends State<ColorIndicator>
     with TickerProviderStateMixin {
   late AnimationController controller;
   bool isSelected = false;
@@ -52,9 +49,6 @@ class _ColorIndicatorState extends State<ColorIndicator>
             widget.changeIndexCallBack.call(widget.index);
           });
 
-          setState(() {
-            isSelected = widget.globalIndex == widget.index;
-          });
           if (isSelected) {
             controller.forward();
           } else {
