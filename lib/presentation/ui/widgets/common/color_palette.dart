@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/presentation/ui/app_ui.dart';
 import 'package:todo_list/presentation/ui/widgets/common/add_color_button.dart';
 import 'package:todo_list/presentation/ui/widgets/common/color_indicator.dart';
+import 'package:todo_list/presentation/viewmodel/add_category_page/add_category_page_viewmodel.dart';
 import 'package:todo_list/presentation/viewmodel/add_category_page/color_picker_viewmodel.dart';
 
 class ColorPalette extends ConsumerStatefulWidget {
@@ -15,10 +16,8 @@ class _ColorPaletteState extends ConsumerState<ColorPalette> {
   List<GlobalKey<ColorIndicatorState>> keys = [];
   final _colorPickerViewModelStateNotifierProvider =
       colorPickerViewModelStateNotifierProvider;
-  @override
-  void initState() {
-    super.initState();
-  }
+  final _addCategoryPageViewModelStateNotifierProvider =
+      addCategoryPageViewModelStateNotifierProvider;
 
   _onColorClick(int index) {
     keys[index].currentState!.isSelected = true;
@@ -45,7 +44,12 @@ class _ColorPaletteState extends ConsumerState<ColorPalette> {
                   key: keys[i],
                   index: i,
                   color: content[i],
-                  onSelect: (Color color) {},
+                  onSelect: (Color color) {
+                    ref
+                        .watch(_addCategoryPageViewModelStateNotifierProvider
+                            .notifier)
+                        .selectedColor = color;
+                  },
                   changeIndexCallBack: _onColorClick,
                 );
               } else {

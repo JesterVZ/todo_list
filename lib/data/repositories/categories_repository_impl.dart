@@ -14,19 +14,20 @@ import 'package:todo_list/domain/repository/category/categories_repository.dart'
 class CategoriesRepositoryImpl implements CategoriesRepository {
   final CategoryDataBase _taskDatabase;
   final ColorDataBase _colorDataBase;
-  final CategotyListMapper _listMapper;
   final ColorMapper _colorMapper;
+  final CategotyMapper _categoryMapper;
   CategoriesRepositoryImpl(this._taskDatabase, this._colorDataBase,
-      this._colorMapper, this._listMapper);
+      this._colorMapper, this._categoryMapper);
   @override
-  Future createCategory(CategoryModel model) {
-    throw UnimplementedError();
+  Future createCategory(CategoryModel model) async {
+    await _taskDatabase
+        .insertCategory(_categoryMapper.transformToNewEntityMap(model));
   }
 
   @override
   Future<Either<Failure, CategoryList>> getAllCategories() async {
     final categoryList = await _taskDatabase.getAllCategories();
-    final result = _listMapper.transformToModel(categoryList);
+    final result = _categoryMapper.transformToModel(categoryList);
     return Right(result);
   }
 

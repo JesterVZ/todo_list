@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CategoryEntity {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  Color get color => throw _privateConstructorUsedError;
   int get count => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,7 +32,7 @@ abstract class $CategoryEntityCopyWith<$Res> {
           CategoryEntity value, $Res Function(CategoryEntity) then) =
       _$CategoryEntityCopyWithImpl<$Res, CategoryEntity>;
   @useResult
-  $Res call({int id, String name, int count});
+  $Res call({int id, String name, Color color, int count});
 }
 
 /// @nodoc
@@ -49,6 +50,7 @@ class _$CategoryEntityCopyWithImpl<$Res, $Val extends CategoryEntity>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? color = null,
     Object? count = null,
   }) {
     return _then(_value.copyWith(
@@ -60,6 +62,10 @@ class _$CategoryEntityCopyWithImpl<$Res, $Val extends CategoryEntity>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -76,7 +82,7 @@ abstract class _$$_CategoryEntityCopyWith<$Res>
       __$$_CategoryEntityCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, int count});
+  $Res call({int id, String name, Color color, int count});
 }
 
 /// @nodoc
@@ -92,6 +98,7 @@ class __$$_CategoryEntityCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? color = null,
     Object? count = null,
   }) {
     return _then(_$_CategoryEntity(
@@ -103,6 +110,10 @@ class __$$_CategoryEntityCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      color: null == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color,
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -115,7 +126,10 @@ class __$$_CategoryEntityCopyWithImpl<$Res>
 
 class _$_CategoryEntity extends _CategoryEntity {
   const _$_CategoryEntity(
-      {required this.id, required this.name, required this.count})
+      {required this.id,
+      required this.name,
+      required this.color,
+      required this.count})
       : super._();
 
   @override
@@ -123,11 +137,13 @@ class _$_CategoryEntity extends _CategoryEntity {
   @override
   final String name;
   @override
+  final Color color;
+  @override
   final int count;
 
   @override
   String toString() {
-    return 'CategoryEntity(id: $id, name: $name, count: $count)';
+    return 'CategoryEntity(id: $id, name: $name, color: $color, count: $count)';
   }
 
   @override
@@ -137,11 +153,12 @@ class _$_CategoryEntity extends _CategoryEntity {
             other is _$_CategoryEntity &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.color, color) || other.color == color) &&
             (identical(other.count, count) || other.count == count));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, count);
+  int get hashCode => Object.hash(runtimeType, id, name, color, count);
 
   @JsonKey(ignore: true)
   @override
@@ -154,6 +171,7 @@ abstract class _CategoryEntity extends CategoryEntity {
   const factory _CategoryEntity(
       {required final int id,
       required final String name,
+      required final Color color,
       required final int count}) = _$_CategoryEntity;
   const _CategoryEntity._() : super._();
 
@@ -161,6 +179,8 @@ abstract class _CategoryEntity extends CategoryEntity {
   int get id;
   @override
   String get name;
+  @override
+  Color get color;
   @override
   int get count;
   @override

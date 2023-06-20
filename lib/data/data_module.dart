@@ -11,7 +11,7 @@ final dataBaseProvider =
 final colorDataBaseProvider =
     Provider<ColorDataBase>((_) => ColorDataBaseImpl());
 final categoryListMapperProvider =
-    Provider<CategotyListMapper>((_) => CategotyListMapperImpl());
+    Provider<CategotyMapper>((_) => CategotyMapperImpl());
 final colorMapperProvider = Provider<ColorMapper>((_) => ColorMapperImpl());
 
 final categoriesRepositoryProvider = Provider<CategoriesRepository>((ref) =>

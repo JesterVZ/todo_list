@@ -5,8 +5,8 @@ import 'package:todo_list/domain/domain_module.dart';
 import 'package:todo_list/domain/services/dialog_service.dart';
 import 'package:todo_list/domain/usecase/add_color_usecase.dart';
 import 'package:todo_list/domain/usecase/get_colors_usecase.dart';
-import 'package:todo_list/presentation/ui/app_colors.dart';
 import 'package:todo_list/presentation/state/state.dart';
+import 'package:todo_list/presentation/ui/app_colors.dart';
 import 'package:todo_list/presentation/ui/widgets/dialogs/color_picker_dialog.dart';
 
 final colorPickerViewModelStateNotifierProvider =
@@ -24,6 +24,7 @@ class ColorPickerViewModel extends StateNotifier<State<dynamic>> {
     AppColors.greenColor,
     AppColors.blueColor
   ];
+
   ColorPickerViewModel(this._useCase, this._addColorUseCase)
       : super(const State.init()) {
     _getColors();

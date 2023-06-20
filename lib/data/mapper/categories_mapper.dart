@@ -1,17 +1,28 @@
+import 'package:todo_list/data/datasource/database/db_const.dart';
 import 'package:todo_list/data/entities/category_entity.dart';
 import 'package:todo_list/data/entities/category_list.dart';
+import 'package:todo_list/domain/model/category_model.dart';
 
-abstract interface class CategotyListMapper {
+abstract interface class CategotyMapper {
   CategoryList transformToModel(final List<Map<String, dynamic>> categories);
+  Entity transformToNewEntityMap(CategoryModel model);
 }
 
-class CategotyListMapperImpl implements CategotyListMapper {
+class CategotyMapperImpl implements CategotyMapper {
   @override
   CategoryList transformToModel(List<Map<String, dynamic>> categories) {
     final values = categories
-        .map((x) =>
-            CategoryEntity(id: x['id'], name: x['name'], count: x['count']))
+        .map((x) => CategoryEntity(
+            id: x['id'], name: x['name'], color: x['color'], count: x['count']))
         .toList();
     return CategoryList(values: values);
   }
+
+  @override
+  Entity transformToNewEntityMap(CategoryModel model) => {
+        'id': null,
+        'name': model.name,
+        'color': model.color!.value.toRadixString(16),
+        'count': model.count
+      };
 }

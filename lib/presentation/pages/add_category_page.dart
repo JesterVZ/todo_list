@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_list/domain/model/category_model.dart';
 import 'package:todo_list/presentation/ui/app_colors.dart';
 import 'package:todo_list/presentation/ui/app_ui.dart';
 import 'package:todo_list/presentation/ui/widgets/common/app_scaffold.dart';
 import 'package:todo_list/presentation/ui/widgets/common/color_palette.dart';
+import 'package:todo_list/presentation/viewmodel/add_category_page/add_category_page_viewmodel.dart';
 
 // ignore: must_be_immutable
-class AddCategoryPage extends StatefulWidget {
+class AddCategoryPage extends ConsumerStatefulWidget {
   const AddCategoryPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => AddCategoryPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => AddCategoryPageState();
 }
 
-class AddCategoryPageState extends State<AddCategoryPage> {
+class AddCategoryPageState extends ConsumerState<AddCategoryPage> {
+  final categoryNameTextEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) => GestureDetector(
       onTap: () {
@@ -62,6 +67,7 @@ class AddCategoryPageState extends State<AddCategoryPage> {
             ?.copyWith(color: Colors.white, fontWeight: FontWeight.w400),
       );
   _buildNameTextField() => TextFormField(
+        controller: categoryNameTextEditingController,
         decoration: const InputDecoration(
           hintText: 'Название',
         ),
@@ -87,10 +93,17 @@ class AddCategoryPageState extends State<AddCategoryPage> {
                 child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.greenColor),
-              onPressed: () {},
-              child: const Text("Добавить задачу"),
+              onPressed: _addCategoryButtonPressed,
+              child: const Text("Добавить категорию"),
             ))
           ],
         ),
       );
+  _addCategoryButtonPressed() {
+    final addCategoryVM =
+        ref.watch(addCategoryPageViewModelStateNotifierProvider.notifier);
+    addCategoryVM.currentCategoryModel = CategoryModel(
+        id: 0, name: categoryNameTextEditingController.text, count: 0);
+    addCategoryVM.addCategory(categoryNameTextEditingController.text);
+  }
 }

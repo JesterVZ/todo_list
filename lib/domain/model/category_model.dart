@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CategoryModel {
-  int id;
+  int? id;
   String name;
   int count;
   Color? color;

@@ -1,10 +1,10 @@
+import 'package:sqflite/sqflite.dart';
 import 'package:todo_list/data/datasource/database/db_const.dart';
-import 'package:todo_list/domain/model/category_model.dart';
 
 abstract interface class CategoryDataBase {
   Future getAllCategories();
-  Future insertCategory(CategoryModel model);
-  Future editCategory(CategoryModel model);
+  Future insertCategory(Entity model);
+  Future editCategory(Entity model);
   Future deleteCategory();
 }
 
@@ -16,8 +16,14 @@ class CategoryDatabaseImpl with DbProvider implements CategoryDataBase {
   }
 
   @override
-  Future insertCategory(CategoryModel model) async {
-    //final db = await database;
+  Future insertCategory(Entity model) async {
+    final db = await database;
+    await db.transaction((txn) async {
+      final id = await txn.insert(DbProvider.categoriesTableName, model,
+          conflictAlgorithm: ConflictAlgorithm.replace);
+      await txn
+          .query(DbProvider.colorsTableName, where: 'id = ?', whereArgs: [id]);
+    });
   }
 
   @override
@@ -27,7 +33,7 @@ class CategoryDatabaseImpl with DbProvider implements CategoryDataBase {
   }
 
   @override
-  Future editCategory(CategoryModel model) {
+  Future editCategory(Entity model) {
     // TODO: implement editCategory
     throw UnimplementedError();
   }

@@ -1,5 +1,5 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 typedef DbEntity = List<Entity>;
 typedef Entity = Map<String, dynamic>;
@@ -22,7 +22,9 @@ mixin DbProvider {
           await db.execute('''
           CREATE TABLE IF NOT EXISTS $categoriesTableName(
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-            name TEXT NOT NULL
+            name TEXT NOT NULL,
+            count INTEGER,
+            color INTEGER
           )
           
         ''');

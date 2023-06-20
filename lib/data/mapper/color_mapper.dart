@@ -9,9 +9,8 @@ abstract interface class ColorMapper {
 
 class ColorMapperImpl implements ColorMapper {
   @override
-  Entity transformToNewEntityMap(Color color) {
-    return {'id': null, 'value': color.value.toRadixString(16)};
-  }
+  Entity transformToNewEntityMap(Color color) =>
+      {'id': null, 'value': color.value.toRadixString(16)};
 
   @override
   List<ColorEntity> transformToModel(List<Map<String, dynamic>> colors) =>
