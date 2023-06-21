@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:todo_list/data/datasource/database/db_const.dart';
 import 'package:todo_list/data/entities/category_entity.dart';
 import 'package:todo_list/data/entities/category_list.dart';
@@ -13,7 +14,10 @@ class CategotyMapperImpl implements CategotyMapper {
   CategoryList transformToModel(List<Map<String, dynamic>> categories) {
     final values = categories
         .map((x) => CategoryEntity(
-            id: x['id'], name: x['name'], color: x['color'], count: x['count']))
+            id: x['id'],
+            name: x['name'],
+            color: Color(int.parse(x['color'], radix: 16)),
+            count: x['count']))
         .toList();
     return CategoryList(values: values);
   }

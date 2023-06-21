@@ -123,35 +123,31 @@ class _MainPageState extends State<MainPage> {
           builder: (context, ref, _) => ref
               .watch(_mainPageViewModeltateNotifierProvider)
               .maybeWhen(success: (content) {
-            dynamic list = [];
-            if (list.isEmpty) {
-              panelController.hide();
-              return ListView(
+            dynamic list = content;
+            panelController.show();
+            return ListView.separated(
                 scrollDirection: Axis.horizontal,
-                children: [
-                  AddCategoryCard(
-                    callBack: () {
-                      Navigator.push(context,
-                          BottomToTopPageRoute(page: const AddCategoryPage()));
-                    },
-                  )
-                ],
-              );
-            } else {
-              panelController.show();
-              return ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int i) {
+                itemBuilder: (BuildContext context, int i) {
+                  if (i <= content.length - 1) {
                     return CategoryCard(
                         color: list[i].color!,
                         name: list[i].name,
                         count: list[i].count);
-                  },
-                  separatorBuilder: (BuildContext context, int i) => Container(
-                        width: 33,
-                      ),
-                  itemCount: list.length);
-            }
+                  } else {
+                    return AddCategoryCard(
+                      callBack: () {
+                        Navigator.push(
+                            context,
+                            BottomToTopPageRoute(
+                                page: const AddCategoryPage()));
+                      },
+                    );
+                  }
+                },
+                separatorBuilder: (BuildContext context, int i) => Container(
+                      width: 33,
+                    ),
+                itemCount: content.length + 1);
           }, orElse: () {
             return Container();
           }),

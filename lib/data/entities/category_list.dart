@@ -13,4 +13,6 @@ class CategoryList with _$CategoryList {
   operator [](final int index) => values[index];
 
   int get length => values.length;
+
+  bool get isEmpty => values.isEmpty;
 }
