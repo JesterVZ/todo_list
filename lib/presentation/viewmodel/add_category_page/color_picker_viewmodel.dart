@@ -25,6 +25,8 @@ class ColorPickerViewModel extends StateNotifier<State<dynamic>> {
     AppColors.blueColor
   ];
 
+  m.Color? selectedColor;
+
   ColorPickerViewModel(this._useCase, this._addColorUseCase)
       : super(const State.init()) {
     _getColors();

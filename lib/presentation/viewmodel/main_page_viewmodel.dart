@@ -13,10 +13,10 @@ final mainPageViewModelStateNotifierProvider =
 class MainPageViewModel extends StateNotifier<State<CategoryList>> {
   final GetCategoriesUseCase _getCategoriesUseCase;
   MainPageViewModel(this._getCategoriesUseCase) : super(const State.init()) {
-    _getCategories();
+    getCategories();
   }
 
-  _getCategories() async {
+  getCategories() async {
     try {
       state = const State.loading();
       final categories = await _getCategoriesUseCase.call();

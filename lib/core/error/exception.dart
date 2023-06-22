@@ -1,0 +1,1 @@
+class UnselectedColorException implements Exception {}

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:todo_list/base/widgets/app_page_view.dart';
+import 'package:todo_list/data/entities/category_list.dart';
 import 'package:todo_list/presentation/pages/add_category_page.dart';
 import 'package:todo_list/presentation/ui/app_colors.dart';
 import 'package:todo_list/presentation/ui/app_ui.dart';
@@ -15,13 +17,18 @@ class MainPage extends AppPageView {
   const MainPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _MainPageState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _MainPageState();
 
   @override
   String getTitle(BuildContext context) => 'Главная';
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends ConsumerState<MainPage> {
+  bool isNotFound = false;
+  bool loading = false;
+
+  late CategoryList categoryList;
+
   final searchController = TextEditingController();
   final panelController = PanelController();
   final _mainPageViewModeltateNotifierProvider =
@@ -30,16 +37,36 @@ class _MainPageState extends State<MainPage> {
   Future refreshData() async {}
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(FocusNode());
-        },
-        child: AppScaffold(
-          appBar:
-              AppUI.appBar(context: context, leading: _buildSettingsButton()),
-          body: _buildContent(),
-        ),
-      );
+  Widget build(BuildContext context) {
+    ref.watch(_mainPageViewModeltateNotifierProvider).when(
+          error: (exception) {
+            print(exception);
+          },
+          init: () {},
+          loading: () {
+            loading = true;
+          },
+          success: (data) {
+            loading = false;
+            categoryList = data;
+            if (categoryList.isEmpty) {
+              isNotFound = true;
+            } else {
+              isNotFound = false;
+            }
+          },
+        );
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: AppScaffold(
+        appBar: AppUI.appBar(context: context, leading: _buildSettingsButton()),
+        body: _buildContent(),
+      ),
+    );
+  }
+
   _buildSettingsButton() =>
       IconButton(onPressed: () {}, icon: const Icon(Icons.settings));
 
@@ -52,14 +79,48 @@ class _MainPageState extends State<MainPage> {
       borderRadius: BorderRadius.circular(33));
 
   _buildPanel() => Container(
-        width: MediaQuery.of(context).size.width,
-        height: 250,
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(33),
-              topRight: Radius.circular(33),
-            )),
+      width: MediaQuery.of(context).size.width,
+      height: 250,
+      decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(33),
+            topRight: Radius.circular(33),
+          )),
+      child: Padding(
+        padding: AppUI.panelContentPadding,
+        child: Column(
+          children: [
+            _buildPanelTitle(),
+            AppUI.contentVerticalSpacingMedium,
+            isNotFound ? _buildNotFoundScreed() : _buildTaskPanel(),
+          ],
+        ),
+      ));
+
+  _buildPanelTitle() => Text(
+        'Задачи на сегодня',
+        style: Theme.of(context)
+            .textTheme
+            .titleMedium!
+            .copyWith(fontWeight: FontWeight.bold, color: AppColors.blackColor),
+      );
+
+  _buildNotFoundScreed() => Column(
+        children: [
+          Text(
+            "Здесь пока ничего нет.Добавьте задачи и категории",
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium!
+                .copyWith(fontWeight: FontWeight.w100, color: AppColors.gray2),
+          ),
+          SizedBox(child: SvgPicture.asset('assets/not_found.svg'))
+        ],
+      );
+  _buildTaskPanel() => const Column(
+        children: [],
       );
 
   _buildBody() => Column(
@@ -116,41 +177,30 @@ class _MainPageState extends State<MainPage> {
       );
   _buildHeader(String text) =>
       Text(text, style: Theme.of(context).textTheme.titleLarge);
-  _buildCategoryList() => SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: 130,
-        child: Consumer(
-          builder: (context, ref, _) => ref
-              .watch(_mainPageViewModeltateNotifierProvider)
-              .maybeWhen(success: (content) {
-            dynamic list = content;
-            panelController.show();
-            return ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int i) {
-                  if (i <= content.length - 1) {
-                    return CategoryCard(
-                        color: list[i].color!,
-                        name: list[i].name,
-                        count: list[i].count);
-                  } else {
-                    return AddCategoryCard(
-                      callBack: () {
-                        Navigator.push(
-                            context,
-                            BottomToTopPageRoute(
-                                page: const AddCategoryPage()));
-                      },
-                    );
-                  }
-                },
-                separatorBuilder: (BuildContext context, int i) => Container(
-                      width: 33,
-                    ),
-                itemCount: content.length + 1);
-          }, orElse: () {
-            return Container();
-          }),
-        ),
-      );
+  _buildCategoryList() => loading
+      ? const SizedBox()
+      : SizedBox(
+          width: MediaQuery.of(context).size.width,
+          height: 130,
+          child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int i) {
+                if (i <= categoryList.length - 1) {
+                  return CategoryCard(
+                      color: categoryList[i].color!,
+                      name: categoryList[i].name,
+                      count: categoryList[i].count);
+                } else {
+                  return AddCategoryCard(
+                    callBack: () {
+                      Navigator.push(context,
+                          BottomToTopPageRoute(page: const AddCategoryPage()));
+                    },
+                  );
+                }
+              },
+              separatorBuilder: (BuildContext context, int i) => Container(
+                    width: 33,
+                  ),
+              itemCount: categoryList.length + 1));
 }

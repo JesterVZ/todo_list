@@ -19,7 +19,12 @@ class CategoryCard extends StatelessWidget {
         padding: AppUI.categoryPadding,
         decoration: AppUI.categoryCardBoxDecoration(color),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(name, style: Theme.of(context).textTheme.titleMedium),
+          Flexible(
+              child: Text(
+            name,
+            style: Theme.of(context).textTheme.titleMedium,
+            overflow: TextOverflow.ellipsis,
+          )),
           _buildSeparator(),
           Text(_countToString(count),
               style: Theme.of(context).textTheme.titleSmall),

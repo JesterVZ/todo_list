@@ -3,29 +3,45 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/domain/domain_module.dart';
 import 'package:todo_list/domain/model/category_model.dart';
 import 'package:todo_list/domain/usecase/add_category_usecase.dart';
-import 'package:todo_list/presentation/state/state.dart';
+import 'package:todo_list/presentation/viewmodel/add_category_page/color_picker_viewmodel.dart';
+import 'package:todo_list/presentation/viewmodel/main_page_viewmodel.dart';
 
 final addCategoryPageViewModelStateNotifierProvider =
-    StateNotifierProvider.autoDispose<AddCategoryPageViewModel, State<dynamic>>(
-        (ref) =>
-            AddCategoryPageViewModel(ref.watch(addCaregoryUseCaseProvider)));
+    Provider.autoDispose<AddCategoryPageViewModel>((ref) =>
+        AddCategoryPageViewModel(
+            ref.watch(addCaregoryUseCaseProvider),
+            ref.watch(colorPickerViewModelStateNotifierProvider.notifier),
+            ref.watch(mainPageViewModelStateNotifierProvider.notifier)));
 
-class AddCategoryPageViewModel extends StateNotifier<State<dynamic>> {
+class AddCategoryPageViewModel {
   final AddCategoryUseCase _useCase;
-  AddCategoryPageViewModel(this._useCase) : super(const State.init());
+  AddCategoryPageViewModel(
+      this._useCase, this._colorPickerViewModel, this._mainPageViewModel);
 
+  final ColorPickerViewModel _colorPickerViewModel;
+  final MainPageViewModel _mainPageViewModel;
   CategoryModel? currentCategoryModel;
-  late material.Color selectedColor;
+  material.Color? selectedColor;
+  var _title = '';
 
-  addCategory(String name) async {
-    try {
-      state = const State.loading();
-      currentCategoryModel =
-          CategoryModel(id: null, name: name, count: 0, color: selectedColor);
-      await _useCase.call(currentCategoryModel!);
-      state = const State.success(true);
-    } on Exception catch (e) {
-      state = State.error(e);
+  String appBarTitle() => 'Новая категория';
+
+  String? categotyNameValudate() {
+    if (_title.isEmpty) {
+      return 'Введите название';
     }
+    return null;
+  }
+
+  setTitle(String title) => _title = title;
+
+  addCategory() async {
+    currentCategoryModel = CategoryModel(
+        id: null,
+        name: _title,
+        count: 0,
+        color: _colorPickerViewModel.selectedColor);
+    await _useCase.call(currentCategoryModel!);
+    _mainPageViewModel.getCategories();
   }
 }

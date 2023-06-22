@@ -4,8 +4,10 @@ class AppColors {
   static const transparent = Colors.transparent;
   static const backgroundColor = Color(0xFF050D3B);
   static const whiteColor = Colors.white;
+  static const blackColor = Colors.black;
 
   static const gray1 = Color(0xFFB5C0FF);
+  static const gray2 = Color(0xffC9C9C9);
 
   static const MaterialColor appcolor =
       MaterialColor(_appcolorPrimaryValue, <int, Color>{

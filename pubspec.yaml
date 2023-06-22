@@ -33,6 +33,7 @@ flutter:
 
   assets:
     - assets/add_task_button.svg
+    - assets/not_found.svg
 
   fonts:
     - family: Inter

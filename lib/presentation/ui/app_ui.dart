@@ -17,6 +17,7 @@ class AppUI {
   static const categoryPadding = EdgeInsets.all(18);
   static const addCategoryPadding =
       EdgeInsets.only(top: 22, right: 10, bottom: 15, left: 10);
+  static const panelContentPadding = EdgeInsets.all(26);
 
   static const contentVerticalSpacingExtraSmall = SizedBox(height: 8);
 
