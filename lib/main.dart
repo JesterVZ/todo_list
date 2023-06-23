@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_list/domain/domain_module.dart';
-import 'package:todo_list/presentation/pages/main_page.dart';
-import 'package:todo_list/presentation/ui/app_colors.dart';
+import 'package:todo_list/core/domain_module.dart';
+import 'package:todo_list/features/presentation/pages/main_page.dart';
+import 'package:todo_list/features/presentation/ui/app_colors.dart';
 
 void main() {
   runZonedGuarded(() {
