@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/core/domain_module.dart';
-import 'package:todo_list/features/main/data/entities/category_list.dart';
+import 'package:todo_list/core/presentation/state/state.dart';
 import 'package:todo_list/features/main/domain/usecase/get_categories_usecase.dart';
-import 'package:todo_list/features/main/presentation/state/state.dart';
+import 'package:todo_list/features/new_category/data/entities/category_list.dart';
 
 final mainPageViewModelStateNotifierProvider =
     StateNotifierProvider.autoDispose<MainPageViewModel, State<CategoryList>>(

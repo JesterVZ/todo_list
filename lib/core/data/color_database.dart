@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:todo_list/features/main/data/datasource/database/db_const.dart';
+import 'package:todo_list/core/data/db_const.dart';
 
 abstract interface class ColorDataBase {
   Future getAllColors();

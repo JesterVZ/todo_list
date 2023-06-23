@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_list/features/main/domain/services/dialog_service.dart';
-import 'package:todo_list/features/main/presentation/ui/app_colors.dart';
-import 'package:todo_list/features/main/presentation/ui/app_ui.dart';
-import 'package:todo_list/features/main/presentation/ui/widgets/common/app_scaffold.dart';
-import 'package:todo_list/features/main/presentation/ui/widgets/common/color_palette.dart';
+import 'package:todo_list/core/domain/services/dialog_service.dart';
+import 'package:todo_list/core/presentation/app_colors.dart';
+import 'package:todo_list/core/presentation/app_scaffold.dart';
+import 'package:todo_list/core/presentation/app_ui.dart';
 import 'package:todo_list/features/main/presentation/ui/widgets/dialogs/color_picker_dialog.dart';
-import 'package:todo_list/features/main/presentation/ui/widgets/dialogs/information_dialog.dart';
-import 'package:todo_list/features/main/presentation/viewmodel/add_category_page/add_category_page_viewmodel.dart';
+import 'package:todo_list/core/presentation/dialogs/information_dialog.dart';
+import 'package:todo_list/features/new_category/presentation/ui/widgets/color_palette.dart';
+import 'package:todo_list/features/new_category/presentation/viewmodel/add_category_page_viewmodel.dart';
 
 // ignore: must_be_immutable
 class AddCategoryPage extends ConsumerStatefulWidget {

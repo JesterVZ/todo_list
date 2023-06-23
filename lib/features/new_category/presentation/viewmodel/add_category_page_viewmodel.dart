@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart' as material;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/core/domain_module.dart';
-import 'package:todo_list/features/main/domain/model/category_model.dart';
-import 'package:todo_list/features/main/domain/usecase/add_category_usecase.dart';
-import 'package:todo_list/features/main/presentation/viewmodel/add_category_page/color_picker_viewmodel.dart';
+import 'package:todo_list/features/new_category/domain/model/category_model.dart';
+import 'package:todo_list/features/new_category/domain/usecase/add_category_usecase.dart';
 import 'package:todo_list/features/main/presentation/viewmodel/main_page_viewmodel.dart';
+import 'package:todo_list/features/new_category/presentation/viewmodel/color_picker_viewmodel.dart';
 
 final addCategoryPageViewModelStateNotifierProvider =
     Provider.autoDispose<AddCategoryPageViewModel>((ref) =>

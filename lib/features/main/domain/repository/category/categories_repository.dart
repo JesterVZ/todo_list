@@ -1,13 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:flutter/material.dart';
 import 'package:todo_list/core/utils/error/failure.dart';
-import 'package:todo_list/features/main/data/entities/category_list.dart';
-import 'package:todo_list/features/main/data/entities/color_entity.dart';
-import 'package:todo_list/features/main/domain/model/category_model.dart';
+import 'package:todo_list/features/new_category/data/entities/category_list.dart';
 
-abstract interface class CategoriesRepository {
+abstract interface class GetCategoriesRepository {
   Future<Either<Failure, CategoryList>> getAllCategories();
-  Future createCategory(CategoryModel model);
-  Future insertColor(Color color);
-  Future<Either<Failure, List<ColorEntity>>> getAllColors();
+
 }

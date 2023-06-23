@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:todo_list/features/main/data/entities/category_entity.dart';
+import 'package:todo_list/features/new_category/data/entities/category_entity.dart';
 
 part 'category_list.freezed.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/features/main/data/datasource/database/db_const.dart';
-import 'package:todo_list/features/main/data/entities/category_entity.dart';
-import 'package:todo_list/features/main/data/entities/category_list.dart';
-import 'package:todo_list/features/main/domain/model/category_model.dart';
+import 'package:todo_list/core/data/db_const.dart';
+import 'package:todo_list/features/new_category/data/entities/category_entity.dart';
+import 'package:todo_list/features/new_category/data/entities/category_list.dart';
+import 'package:todo_list/features/new_category/domain/model/category_model.dart';
 abstract interface class CategotyMapper {
   CategoryList transformToModel(final List<Map<String, dynamic>> categories);
   Entity transformToNewEntityMap(CategoryModel model);

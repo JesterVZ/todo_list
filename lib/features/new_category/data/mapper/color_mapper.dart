@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/features/main/data/datasource/database/db_const.dart';
-import 'package:todo_list/features/main/data/entities/color_entity.dart';
+import 'package:todo_list/core/data/db_const.dart';
+import 'package:todo_list/features/new_category/data/entities/color_entity.dart';
 
 
 abstract interface class ColorMapper {

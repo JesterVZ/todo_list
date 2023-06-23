@@ -2,12 +2,12 @@ import 'package:flutter/material.dart' as m;
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/core/domain_module.dart';
-import 'package:todo_list/features/main/domain/services/dialog_service.dart';
-import 'package:todo_list/features/main/domain/usecase/add_color_usecase.dart';
-import 'package:todo_list/features/main/domain/usecase/get_colors_usecase.dart';
-import 'package:todo_list/features/main/presentation/state/state.dart';
-import 'package:todo_list/features/main/presentation/ui/app_colors.dart';
+import 'package:todo_list/core/domain/services/dialog_service.dart';
+import 'package:todo_list/core/presentation/app_colors.dart';
+import 'package:todo_list/core/presentation/state/state.dart';
 import 'package:todo_list/features/main/presentation/ui/widgets/dialogs/color_picker_dialog.dart';
+import 'package:todo_list/features/new_category/domain/usecase/add_color_usecase.dart';
+import 'package:todo_list/features/new_category/domain/usecase/get_colors_usecase.dart';
 final colorPickerViewModelStateNotifierProvider =
     StateNotifierProvider.autoDispose<ColorPickerViewModel, State<dynamic>>(
         (ref) {

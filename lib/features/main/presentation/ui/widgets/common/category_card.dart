@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:todo_list/features/main/presentation/ui/app_ui.dart';
+import 'package:todo_list/core/presentation/app_ui.dart';
 
 
 class CategoryCard extends StatelessWidget {

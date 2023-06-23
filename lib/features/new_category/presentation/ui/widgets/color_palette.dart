@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_list/features/main/presentation/ui/app_ui.dart';
-import 'package:todo_list/features/main/presentation/ui/widgets/common/add_color_button.dart';
-import 'package:todo_list/features/main/presentation/ui/widgets/common/color_indicator.dart';
-import 'package:todo_list/features/main/presentation/viewmodel/add_category_page/color_picker_viewmodel.dart';
+import 'package:todo_list/core/presentation/app_ui.dart';
+import 'package:todo_list/features/new_category/presentation/ui/widgets/add_color_button.dart';
+import 'package:todo_list/features/new_category/presentation/ui/widgets/color_indicator.dart';
+import 'package:todo_list/features/new_category/presentation/viewmodel/color_picker_viewmodel.dart';
 
 
 
