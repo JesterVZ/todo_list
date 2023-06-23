@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_list/features/data/datasource/database/category_database.dart';
-import 'package:todo_list/features/data/datasource/database/color_database.dart';
-import 'package:todo_list/features/data/mapper/categories_mapper.dart';
-import 'package:todo_list/features/data/mapper/color_mapper.dart';
-import 'package:todo_list/features/data/repositories/categories_repository_impl.dart';
-import 'package:todo_list/features/domain/repository/category/categories_repository.dart';
+import 'package:todo_list/features/main/data/datasource/database/category_database.dart';
+import 'package:todo_list/features/main/data/datasource/database/color_database.dart';
+import 'package:todo_list/features/main/data/mapper/categories_mapper.dart';
+import 'package:todo_list/features/main/data/mapper/color_mapper.dart';
+import 'package:todo_list/features/main/data/repositories/categories_repository_impl.dart';
+import 'package:todo_list/features/main/domain/repository/category/categories_repository.dart';
 
 
 final dataBaseProvider =
