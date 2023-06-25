@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/core/domain_module.dart';
 import 'package:todo_list/features/new_category/domain/model/category_model.dart';
 import 'package:todo_list/features/new_category/domain/usecase/add_category_usecase.dart';
-import 'package:todo_list/features/main/presentation/viewmodel/main_page_viewmodel.dart';
+import 'package:todo_list/features/main/presentation/viewmodel/categories_page_viewmodel.dart';
 import 'package:todo_list/features/new_category/presentation/viewmodel/color_picker_viewmodel.dart';
 
 final addCategoryPageViewModelStateNotifierProvider =
@@ -11,7 +11,7 @@ final addCategoryPageViewModelStateNotifierProvider =
         AddCategoryPageViewModel(
             ref.watch(addCaregoryUseCaseProvider),
             ref.watch(colorPickerViewModelStateNotifierProvider.notifier),
-            ref.watch(mainPageViewModelStateNotifierProvider.notifier)));
+            ref.watch(categoriesPageViewModelStateNotifierProvider.notifier)));
 
 class AddCategoryPageViewModel {
   final AddCategoryUseCase _useCase;
@@ -19,7 +19,7 @@ class AddCategoryPageViewModel {
       this._useCase, this._colorPickerViewModel, this._mainPageViewModel);
 
   final ColorPickerViewModel _colorPickerViewModel;
-  final MainPageViewModel _mainPageViewModel;
+  final CategoriesPageViewModel _mainPageViewModel;
   CategoryModel? currentCategoryModel;
   material.Color? selectedColor;
   var _title = '';

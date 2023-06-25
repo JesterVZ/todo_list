@@ -5,14 +5,13 @@ import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:todo_list/core/presentation/app_colors.dart';
 import 'package:todo_list/core/presentation/app_page_view.dart';
 import 'package:todo_list/core/presentation/app_ui.dart';
-import 'package:todo_list/features/new_category/data/entities/category_list.dart';
+import 'package:todo_list/features/new_category/domain/model/category_model.dart';
 import 'package:todo_list/features/new_category/presentation/pages/add_category_page.dart';
 import 'package:todo_list/core/presentation/routes/bottom_to_top_page_route.dart';
 import 'package:todo_list/features/main/presentation/ui/widgets/common/add_category_card.dart';
 import 'package:todo_list/core/presentation/app_scaffold.dart';
 import 'package:todo_list/features/main/presentation/ui/widgets/common/category_card.dart';
-import 'package:todo_list/features/main/presentation/viewmodel/main_page_viewmodel.dart';
-
+import 'package:todo_list/features/main/presentation/viewmodel/categories_page_viewmodel.dart';
 
 class MainPage extends AppPageView {
   const MainPage({super.key});
@@ -28,12 +27,12 @@ class _MainPageState extends ConsumerState<MainPage> {
   bool isNotFound = false;
   bool loading = false;
 
-  late CategoryList categoryList;
+  late List<CategoryModel> categoryList;
 
   final searchController = TextEditingController();
   final panelController = PanelController();
   final _mainPageViewModeltateNotifierProvider =
-      mainPageViewModelStateNotifierProvider;
+      categoriesPageViewModelStateNotifierProvider;
 
   Future refreshData() async {}
 
@@ -64,9 +63,21 @@ class _MainPageState extends ConsumerState<MainPage> {
       child: AppScaffold(
         appBar: AppUI.appBar(context: context, leading: _buildSettingsButton()),
         body: _buildContent(),
+        floatingActionButton: _buildAddTaskBtn(),
       ),
     );
   }
+
+  _buildAddTaskBtn() => FloatingActionButton(
+        onPressed: () {},
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        child: SizedBox(
+          width: 27,
+          height: 27,
+          child: SvgPicture.asset('assets/plus.svg'),
+        ),
+      );
 
   _buildSettingsButton() =>
       IconButton(onPressed: () {}, icon: const Icon(Icons.settings));
@@ -117,6 +128,7 @@ class _MainPageState extends ConsumerState<MainPage> {
                 .titleMedium!
                 .copyWith(fontWeight: FontWeight.w100, color: AppColors.gray2),
           ),
+          AppUI.contentVerticalSpacingSmall,
           SizedBox(child: SvgPicture.asset('assets/not_found.svg'))
         ],
       );

@@ -6,5 +6,8 @@ class CategoryModel {
   int count;
   Color? color;
   CategoryModel(
-      {required this.id, required this.name, this.color, required this.count});
+      {required this.id,
+      required this.name,
+      this.color,
+      required this.count});
 }

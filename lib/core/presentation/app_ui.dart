@@ -29,6 +29,8 @@ class AppUI {
 
   static const colorIndicatorSpacing = SizedBox(width: 12);
 
+  static double taskItemBorderRadius = 13;
+
   static categoryCardBoxDecoration(Color color) => BoxDecoration(
       borderRadius: const BorderRadius.all(Radius.circular(25)), color: color);
 }

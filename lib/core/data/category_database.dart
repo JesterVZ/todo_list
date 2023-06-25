@@ -3,9 +3,10 @@ import 'package:todo_list/core/data/db_const.dart';
 
 abstract interface class CategoryDataBase {
   Future getAllCategories();
+  Future getTasksCountForCategory(int categoryId);
   Future insertCategory(Entity model);
   Future editCategory(Entity model);
-  Future deleteCategory();
+  Future deleteCategory(int categoryId);
 }
 
 class CategoryDatabaseImpl with DbProvider implements CategoryDataBase {
@@ -27,7 +28,7 @@ class CategoryDatabaseImpl with DbProvider implements CategoryDataBase {
   }
 
   @override
-  Future deleteCategory() {
+  Future deleteCategory(int categoryId) {
     // TODO: implement deleteCategory
     throw UnimplementedError();
   }
@@ -37,4 +38,11 @@ class CategoryDatabaseImpl with DbProvider implements CategoryDataBase {
     // TODO: implement editCategory
     throw UnimplementedError();
   }
+  
+  @override
+  Future getTasksCountForCategory(int categoryId) async {
+    final db = await database;
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM ${DbProvider.tasksTableName} WHERE category_id = $categoryId')); 
+  }
+  
 }

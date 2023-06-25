@@ -2,17 +2,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/core/domain_module.dart';
 import 'package:todo_list/core/presentation/state/state.dart';
 import 'package:todo_list/features/main/domain/usecase/get_categories_usecase.dart';
-import 'package:todo_list/features/new_category/data/entities/category_list.dart';
+import 'package:todo_list/features/new_category/domain/model/category_model.dart';
 
-final mainPageViewModelStateNotifierProvider =
-    StateNotifierProvider.autoDispose<MainPageViewModel, State<CategoryList>>(
+final categoriesPageViewModelStateNotifierProvider =
+    StateNotifierProvider.autoDispose<CategoriesPageViewModel, State<List<CategoryModel>>>(
         (ref) {
-  return MainPageViewModel(ref.watch(getcategoriesUseCaseProvider));
+  return CategoriesPageViewModel(ref.watch(getcategoriesUseCaseProvider));
 });
 
-class MainPageViewModel extends StateNotifier<State<CategoryList>> {
+class CategoriesPageViewModel extends StateNotifier<State<List<CategoryModel>>> {
   final GetCategoriesUseCase _getCategoriesUseCase;
-  MainPageViewModel(this._getCategoriesUseCase) : super(const State.init()) {
+  CategoriesPageViewModel(this._getCategoriesUseCase) : super(const State.init()) {
     getCategories();
   }
 

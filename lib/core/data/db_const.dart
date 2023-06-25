@@ -7,6 +7,7 @@ mixin DbProvider {
   static const databaseName = 'tasks_database.db';
   static const categoriesTableName = 'categories_table';
   static const colorsTableName = 'colors_table';
+  static const tasksTableName = 'tasks_table';
   static const databaseVersion = 1;
   static Database? _database;
   Future<Database> get database async {
@@ -32,6 +33,16 @@ mixin DbProvider {
         CREATE TABLE IF NOT EXISTS $colorsTableName(
             id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             value TEXT NOT NULL
+          )
+        ''');
+        await db.execute(''' 
+        CREATE TABLE IF NOT EXISTS $tasksTableName(
+            id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+            title TEXT NOT NULL,
+            description TEXT,
+            date TEXT,
+            category_id INTEGER,
+            FOREIGN KEY (category_id) REFERENCES  $categoriesTableName (id)
           )
         ''');
         },

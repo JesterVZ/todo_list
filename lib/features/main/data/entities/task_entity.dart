@@ -8,5 +8,6 @@ class TaskEntity with _$TaskEntity {
       {required int id,
       required String title,
       required String description,
+      required DateTime date,
       required int categoryId}) = _TaskEntity;
 }

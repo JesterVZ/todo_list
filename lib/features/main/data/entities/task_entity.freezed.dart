@@ -19,6 +19,7 @@ mixin _$TaskEntity {
   int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
   int get categoryId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,7 +33,12 @@ abstract class $TaskEntityCopyWith<$Res> {
           TaskEntity value, $Res Function(TaskEntity) then) =
       _$TaskEntityCopyWithImpl<$Res, TaskEntity>;
   @useResult
-  $Res call({int id, String title, String description, int categoryId});
+  $Res call(
+      {int id,
+      String title,
+      String description,
+      DateTime date,
+      int categoryId});
 }
 
 /// @nodoc
@@ -51,6 +57,7 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
     Object? id = null,
     Object? title = null,
     Object? description = null,
+    Object? date = null,
     Object? categoryId = null,
   }) {
     return _then(_value.copyWith(
@@ -66,6 +73,10 @@ class _$TaskEntityCopyWithImpl<$Res, $Val extends TaskEntity>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -82,7 +93,12 @@ abstract class _$$_TaskEntityCopyWith<$Res>
       __$$_TaskEntityCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, String description, int categoryId});
+  $Res call(
+      {int id,
+      String title,
+      String description,
+      DateTime date,
+      int categoryId});
 }
 
 /// @nodoc
@@ -99,6 +115,7 @@ class __$$_TaskEntityCopyWithImpl<$Res>
     Object? id = null,
     Object? title = null,
     Object? description = null,
+    Object? date = null,
     Object? categoryId = null,
   }) {
     return _then(_$_TaskEntity(
@@ -114,6 +131,10 @@ class __$$_TaskEntityCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
+      date: null == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
       categoryId: null == categoryId
           ? _value.categoryId
           : categoryId // ignore: cast_nullable_to_non_nullable
@@ -129,6 +150,7 @@ class _$_TaskEntity implements _TaskEntity {
       {required this.id,
       required this.title,
       required this.description,
+      required this.date,
       required this.categoryId});
 
   @override
@@ -138,11 +160,13 @@ class _$_TaskEntity implements _TaskEntity {
   @override
   final String description;
   @override
+  final DateTime date;
+  @override
   final int categoryId;
 
   @override
   String toString() {
-    return 'TaskEntity(id: $id, title: $title, description: $description, categoryId: $categoryId)';
+    return 'TaskEntity(id: $id, title: $title, description: $description, date: $date, categoryId: $categoryId)';
   }
 
   @override
@@ -154,13 +178,14 @@ class _$_TaskEntity implements _TaskEntity {
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
                 other.description == description) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.categoryId, categoryId) ||
                 other.categoryId == categoryId));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, title, description, categoryId);
+      Object.hash(runtimeType, id, title, description, date, categoryId);
 
   @JsonKey(ignore: true)
   @override
@@ -174,6 +199,7 @@ abstract class _TaskEntity implements TaskEntity {
       {required final int id,
       required final String title,
       required final String description,
+      required final DateTime date,
       required final int categoryId}) = _$_TaskEntity;
 
   @override
@@ -182,6 +208,8 @@ abstract class _TaskEntity implements TaskEntity {
   String get title;
   @override
   String get description;
+  @override
+  DateTime get date;
   @override
   int get categoryId;
   @override
