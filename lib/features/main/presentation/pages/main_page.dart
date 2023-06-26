@@ -12,6 +12,7 @@ import 'package:todo_list/features/main/presentation/ui/widgets/common/add_categ
 import 'package:todo_list/core/presentation/app_scaffold.dart';
 import 'package:todo_list/features/main/presentation/ui/widgets/common/category_card.dart';
 import 'package:todo_list/features/main/presentation/viewmodel/categories_page_viewmodel.dart';
+import 'package:todo_list/features/new_task/presentation/pages/add_task_page.dart';
 
 class MainPage extends AppPageView {
   const MainPage({super.key});
@@ -69,7 +70,9 @@ class _MainPageState extends ConsumerState<MainPage> {
   }
 
   _buildAddTaskBtn() => FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, BottomToTopPageRoute(page: const AddTaskPage()));
+        },
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(15.0))),
         child: SizedBox(
