@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:todo_list/core/domain/formatter/app_formatter.dart';
 import 'package:todo_list/core/presentation/app_colors.dart';
 import 'package:todo_list/core/presentation/app_scaffold.dart';
 import 'package:todo_list/core/presentation/app_ui.dart';
+import 'package:todo_list/core/presentation/widgets/app_datetime_field.dart';
 import 'package:todo_list/features/new_task/presentation/viewmodel/add_task_page_viewmodel.dart';
 
 class AddTaskPage extends ConsumerStatefulWidget {
@@ -19,6 +22,9 @@ class AddTaskPageState extends ConsumerState<AddTaskPage> {
   final formKey = GlobalKey<FormState>();
 
   bool _isQuickly = false;
+
+  final DateTime _minDate = DateTime.now();
+  final DateTime _maxDate = DateTime(DateTime.now().year + 1);
 
   @override
   void initState() {
@@ -71,7 +77,9 @@ class AddTaskPageState extends ConsumerState<AddTaskPage> {
                       AppUI.contentVerticalSpacingLarge,
                       _buildTitle("Дополнительная информация"),
                       AppUI.contentVerticalSpacingMedium,
-                      _buildCheckBox()
+                      _buildCheckBox(),
+                      AppUI.contentVerticalSpacingMedium,
+                      _buildDateTimeTextField()
                     ]),
               )),
             ))
@@ -103,22 +111,32 @@ class AddTaskPageState extends ConsumerState<AddTaskPage> {
           hintText: 'Описание',
         ),
       );
+  _buildDateTimeTextField() => AppDateTimeField(
+      labelText: 'Дата завершения',
+      startDate: _minDate,
+      endDate: _maxDate,
+      onChanged: (value) {
+        _viewModel.setEndDate = value;
+      },
+      format: DateFormat.yMd(AppFormatter.currentLocale(context)),
+      getInitValueFunc: () => _viewModel.getEndDate);
 
   _buildCheckBox() => Row(
         children: [
           Checkbox(
             value: _isQuickly,
             visualDensity: VisualDensity.comfortable,
-            
-            side: const BorderSide(
-                        color: AppColors.appcolor, width: 2),
+            side: const BorderSide(color: AppColors.appcolor, width: 2),
             onChanged: (value) {
               setState(() {
                 _isQuickly = value ?? false;
               });
             },
           ),
-          Text('Срочная', style: Theme.of(context).textTheme.titleSmall,)
+          Text(
+            'Срочная',
+            style: Theme.of(context).textTheme.titleSmall,
+          )
         ],
       );
 

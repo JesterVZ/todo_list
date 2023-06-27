@@ -1,0 +1,11 @@
+{
+    "categories": "Categories",
+    "new_task": "New task",
+    "new_category": "New category",
+    "main_info": "Main info",
+    "additional_info": "Additional info",
+    "add_task": "Add task",
+    "add_category": "Add category",
+    "not_found": "There is nothing here yet. Add tasks and categories",
+    "search": "Search"
+}

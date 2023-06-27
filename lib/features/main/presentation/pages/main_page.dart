@@ -13,6 +13,7 @@ import 'package:todo_list/core/presentation/app_scaffold.dart';
 import 'package:todo_list/features/main/presentation/ui/widgets/common/category_card.dart';
 import 'package:todo_list/features/main/presentation/viewmodel/categories_page_viewmodel.dart';
 import 'package:todo_list/features/new_task/presentation/pages/add_task_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainPage extends AppPageView {
   const MainPage({super.key});
@@ -124,7 +125,7 @@ class _MainPageState extends ConsumerState<MainPage> {
   _buildNotFoundScreed() => Column(
         children: [
           Text(
-            "Здесь пока ничего нет.Добавьте задачи и категории",
+            AppLocalizations.of(context)!.not_found,
             textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
@@ -156,7 +157,7 @@ class _MainPageState extends ConsumerState<MainPage> {
                           AppUI.contentVerticalSpacingMedium,
                           _buildSearchField(),
                           AppUI.contentVerticalSpacingMedium,
-                          _buildHeader('Категории'),
+                          _buildHeader(AppLocalizations.of(context)!.categories),
                           AppUI.contentVerticalSpacingLarge,
                           _buildCategoryList()
                         ]),
@@ -184,9 +185,9 @@ class _MainPageState extends ConsumerState<MainPage> {
       );
   _buildSearchField() => TextField(
         controller: searchController,
-        decoration: const InputDecoration(
-            hintText: 'Поиск',
-            prefixIcon: Icon(
+        decoration: InputDecoration(
+            hintText: AppLocalizations.of(context)!.search,
+            prefixIcon: const Icon(
               Icons.search,
               color: AppColors.gray1,
             )),

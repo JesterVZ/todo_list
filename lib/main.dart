@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_list/core/domain_module.dart';
 import 'package:todo_list/core/presentation/app_colors.dart';
 import 'package:todo_list/features/main/presentation/pages/main_page.dart';
+import 'package:todo_list/l10n/l10n.dart';
 
 void main() {
   runZonedGuarded(() {
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Todo list',
         navigatorKey: navigatorKey,
+        supportedLocales: L10n.all,
+        //localizationsDelegates: AppLocalizations.localizationsDelegates,
         theme: ThemeData(
             fontFamily: 'Inter',
             primarySwatch: AppColors.appcolor,

@@ -17,7 +17,9 @@ class AddTaskViewModel extends StateNotifier<State> {
 
   set setDescription(String val) => _description = val;
 
-  set setEndDate(DateTime val) => _endDate = val; 
+  set setEndDate(DateTime? val) => _endDate = val; 
+
+  get getEndDate => _endDate;
 
   String? taskTitleValudate() {
     if (_title.isEmpty) {
