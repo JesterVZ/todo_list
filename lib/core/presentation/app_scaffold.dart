@@ -20,6 +20,8 @@ class AppScaffold extends StatelessWidget {
         appBar: appBar,
         floatingActionButton: floatingActionButton,
         floatingActionButtonLocation: floatingActionButtonLocation,
-        body: Container(color: AppColors.backgroundColor, child: body),
+        body: Container(
+          //padding: const EdgeInsets.only(bottom: 80),
+          color: AppColors.backgroundColor, child: body),
       );
 }

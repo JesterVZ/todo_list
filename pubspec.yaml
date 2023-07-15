@@ -25,6 +25,8 @@ dependencies:
   flutter_animate: ^4.1.1+1
   datetime_picker_formfield_new: ^2.1.0
   intl: ^0.18.0
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
