@@ -33,4 +33,8 @@ class AddTaskViewModel extends StateNotifier<State> {
     }
     return null;
   }
+
+  addTask() async{
+    
+  }
 }
